@@ -22,6 +22,14 @@ def openFile():
         f.close()
 
 
+def rate_us():
+    value = msg.askquestion("Experience", "was your experience good?")
+    if value == "yes":
+        msg1 = "Rate us on Play Store!"
+    else:
+        msg1 = "Tell us your problem we will contact you"
+    msg.showinfo("Info", msg1)
+
 
 def saveFile():
     global file
@@ -100,6 +108,11 @@ if __name__  == '__main__':
     my_menu.add_cascade(label="Help",menu=Help_Menu)
     Help_Menu.add_command(label="About..",command=about)
     #end
+
+    #rate menu
+    rate_menu = Menu(my_menu)
+    my_menu.add_cascade(label="Rate us", menu=rate_menu)
+    rate_menu.add_command(label="Rate us", command=rate_us)
 
     root.config(menu=my_menu)
 
