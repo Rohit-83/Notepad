@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter.messagebox as msg
 from tkinter.filedialog import askopenfilename,asksaveasfilename
+import os
 
 def newFile():
     global file
@@ -17,7 +18,7 @@ def openFile():
     else:
         root.title(os.path.basename(file) + " - Notepad")
         TextArea.delete(1.0, END)
-        f = open(file,"r")
+        f = open(file,"w")
         TextArea.insert(1.0, f.read())
         f.close()
 
@@ -34,20 +35,19 @@ def rate_us():
 def saveFile():
     global file
     if file == None:
-        file = asksaveasfilename(initialfile="Untitled.txt",defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Document","*.txt")])
+        file = asksaveasfilename(initialfile= "Untitled.txt" ,defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Document","*.txt")])
 
         if file == "":
             file = None
-
         else:
-            f = open(file,"r")
+            f = open(file,"w")
             f.write(TextArea.get(1.0,END))
             f.close()
 
             root.title(os.path.basename(file) + " - Notepad")
 
     else:
-        f = open(file, "r")
+        f = open(file, "w")
         f.write(TextArea.get(1.0, END))
         f.close()
 
@@ -94,7 +94,7 @@ if __name__  == '__main__':
     File_Menu.add_command(label="Save",command=saveFile)
     File_Menu.add_separator()
     File_Menu.add_command(label="Exit",command=quitApp)
-    #file menu end and edit meneu start
+    #file menu end and edit menu start
 
     Edit_Menu = Menu(my_menu, tearoff=0)
     my_menu.add_cascade(label="Edit",menu=Edit_Menu)
